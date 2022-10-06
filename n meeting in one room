@@ -1,0 +1,36 @@
+int bool comp(pair<pair<int,int>,int>&vec1,pair<pair<int,int>,int>&vec2)
+{
+    if(vec2.first.second>vec1.first.second)
+        return true;
+    else if(vec2.first.second<vec1.first.second)
+        return false;
+    else if(vec2.second>vec1.second)
+    return  true;
+    return false;
+}
+
+
+vector<int> maximumMeetings(vector<int> &start, vector<int> &end) {
+    // Write your code here.
+    vector<pair<pair<int,int>,int>>vec;
+    
+    for(int i=0;i<end.size();i++)
+    {
+        vec.push_back({{start[i],end[i]},i+1});
+    }
+    sort(vec.begin(),vec.end(),comp);
+    
+    vector<int>ans;
+    int l=vec[0].first.second;
+    ans.push_back(vec[0].second);
+    for(int i=1;i<vec.size();i++)
+    {
+        if(l<vec[i].first.first)
+        {
+            l=vec[i].first.second;
+            ans.push_back(vec[i].second);
+        }
+        
+    }
+    return ans;
+}
