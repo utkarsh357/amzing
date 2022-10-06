@@ -61,7 +61,7 @@ void fun(vector<vector<int>>&chess,int i,vector<vector<int>>&ans,int p,vector<in
         {
             for(int n=0;n<p;n++)
             {
-                temp.push_back(chess[i][j]);
+                temp.push_back(chess[m][n]);
             }
         }
         ans.push_back(temp);
@@ -77,11 +77,11 @@ void fun(vector<vector<int>>&chess,int i,vector<vector<int>>&ans,int p,vector<in
             fun(chess,i+1,ans,p);
                 //return true;
           
-                chess[i][j]=0;
+                chess[i][k]=0;
         } */
         if(col[k]==0&&di1[i+k]==0&&di2[i-k+p-1]==0)
         {
-            chess[i][j]=1;
+            chess[i][k]=1;
          //   cout<<"i "<<i<<endl;
            // cout<<"k "<<k<<endl;
        //     row[i]=1;
