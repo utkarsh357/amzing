@@ -1,4 +1,5 @@
-int bool comp(pair<pair<int,int>,int>&vec1,pair<pair<int,int>,int>&vec2)
+#include<bits/stdc++.h>
+static bool comp(pair<pair<int,int>,int>&vec1,pair<pair<int,int>,int>&vec2)
 {
     if(vec2.first.second>vec1.first.second)
         return true;
