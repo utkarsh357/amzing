@@ -1,0 +1,119 @@
+#include<bits/stdc++.h>
+bool safe(vector<vector<int>>&chess,int i,int j,int n)
+{
+  //  int n=chess.size();
+    for(int x=0;x<n;x++)
+    {
+        if(chess[i][x]==1)
+            return false;
+        
+    }
+    for(int y=0;y<n;y++)
+    {
+        if(chess[y][j]==1)
+            return false;
+    }
+    int a=i,b=j;
+    while(a<n&&b<n)
+    {
+        if(chess[a][b]==1)
+            return false;
+        a++;
+        b++;
+    }
+    a=i,b=j;
+    while(a>=0&&b<n)
+    {
+        if(chess[a][b]==1)
+            return false;
+        a--;
+        b++;
+    }
+    a=i,b=j;
+    while(a>=0&&b>=0)
+    {
+        if(chess[a][b]==1)
+            return false;
+        a--;
+        b--;
+    }
+    a=i,b=j;
+    while(a<n&&b>=0)
+    {
+        if(chess[a][b]==1)
+            return false;
+        a++;
+        b--;
+    }
+    
+    return true;
+}
+
+
+
+void fun(vector<vector<int>>&chess,int i,vector<vector<int>>&ans,int p,vector<int>&row,vector<int>&col,vector<int>&di1,vector<int>&di2)
+{
+    
+    if(i==p)
+    {
+        vector<int>temp;
+        for(int m=0;m<p;m++)
+        {
+            for(int n=0;n<p;n++)
+            {
+                temp.push_back(chess[i][j]);
+            }
+        }
+        ans.push_back(temp);
+        return;
+    }
+    
+    for(int k=0;k<p;k++)
+    {
+      /*  if(safe(chess,i,k,p))
+        {
+            chess[i][k]=1;
+            
+            fun(chess,i+1,ans,p);
+                //return true;
+          
+                chess[i][j]=0;
+        } */
+        if(col[k]==0&&di1[i+k]==0&&di2[i-k+p-1]==0)
+        {
+            chess[i][j]=1;
+         //   cout<<"i "<<i<<endl;
+           // cout<<"k "<<k<<endl;
+       //     row[i]=1;
+            col[k]=1;
+            di1[i+k]=1;
+            di2[i-k+p-1]=1;
+            fun(chess,i+1,ans,p,row,col,di1,di2);
+            chess[i][k]=0;
+         //   row[i]=0;
+            col[k]=0;
+            di1[i+k]=0;
+            di2[i-k+p-1]=0;
+        }
+        
+    }
+//    return false;
+}
+
+
+
+
+vector<vector<int>> solveNQueens(int n) {
+    vector<vector<int>>chess(n+1,vector<int>(n+1,0));
+    vector<vector<int>>ans;
+    vector<int>row(n+1,0);
+    vector<int>col(n*2,0);
+    vector<int>di1(n*2,0);
+    vector<int>di2(n*2,0);
+    fun(chess,0,ans,n,row,col,di1,di2);
+    return ans;
+    
+    
+    
+    // Write your code here.
+}
